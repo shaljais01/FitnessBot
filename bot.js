@@ -9,7 +9,7 @@ class EchoBot extends ActivityHandler {
         // See https://aka.ms/about-bot-activity-message to learn more about the message and other activity types.
         this.onMessage(async (context, next) => {
             var weight =78;
-            await context.sendActivity(weight.toString);
+            await context.sendActivity(weight);
             await context.sendActivity('Enter your Height');
             var height =parseInt(context.activity.text,10);
             await context.sendActivity(height.toString);
