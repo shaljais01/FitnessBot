@@ -8,7 +8,11 @@ class EchoBot extends ActivityHandler {
         super();
         // See https://aka.ms/about-bot-activity-message to learn more about the message and other activity types.
         this.onMessage(async (context, next) => {
-            await context.sendActivity(`You said '${ context.activity.text }'`);
+            var weight =parseInt(context,10);
+            await context.sendActivity(weight);
+            await context.sendActivity('Enter your Height');
+        
+            //await context.sendActivity(`You said '${ context.activity.text }'`);
 
             // By calling next() you ensure that the next BotHandler is run.
             await next();
@@ -19,7 +23,7 @@ class EchoBot extends ActivityHandler {
             for (let cnt = 0; cnt < membersAdded.length; ++cnt) {
                 if (membersAdded[cnt].id !== context.activity.recipient.id) {
                     await context.sendActivity('Hello and welcome!');
-                    await context.sendActivity('Enter yourweight');
+                    await context.sendActivity('Enter your weight');
                 }
             }
             // By calling next() you ensure that the next BotHandler is run.
