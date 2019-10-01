@@ -10,10 +10,12 @@ class EchoBot extends ActivityHandler {
         this.onMessage(async (context, next) => {
             var weight =parseInt(context.activity.text,10);
             await context.sendActivity(weight.toString());
-            await context.sendActivity('Enter your Height');
             await next();
+            await context.sendActivity('Enter your Height');
             var height =parseInt(context.activity.text,10);
+            await next();
             await context.sendActivity(height.toString());
+            
             var bmi =height*weight;
             await context.sendActivity('your bmi is');
             await context.sendActivity(bmi.toString());
