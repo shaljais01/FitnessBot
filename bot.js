@@ -2,27 +2,34 @@
 // Licensed under the MIT License.
 
 const { ActivityHandler } = require('botbuilder');
+var height=0;
+var weight=0;
+var step=0;
 
 class EchoBot extends ActivityHandler {
     constructor() {
         super();
         // See https://aka.ms/about-bot-activity-message to learn more about the message and other activity types.
         this.onMessage(async (context, next) => {
-            var weight =parseInt(context.activity.text,10);
-            var height;
-            await context.sendActivity('weight'+weight.toString());
-            await context.sendActivity('Enter your Height');
-            this.onMessage(async (context, next) => {
-
-                 height =parseInt(context.activity.text,10);
-                await context.sendActivity('height'+ height.toString());
-            });
-            
-            
-
+            if(step==0){
+            await context.sendActivity('Enter your weight');
+             weight =parseInt(context.activity.text,10);
+             await context.sendActivity(' weight is '+ weight.toString());
+             step++;
+            }
+            else if(step==1){
+                await context.sendActivity('Enter your height');
+                height =parseInt(context.activity.text,10);
+                await context.sendActivity(' height is '+ height.toString());
+                step++;
+            }
+        else {
             var bmi =height*weight;
             await context.sendActivity('your bmi is');
             await context.sendActivity(bmi.toString());
+            step=0;
+        }
+            await next();
             //await context.sendActivity(`You said '${ context.activity.text }'`);
 
             // By calling next() you ensure that the next BotHandler is run.
@@ -34,7 +41,7 @@ class EchoBot extends ActivityHandler {
             for (let cnt = 0; cnt < membersAdded.length; ++cnt) {
                 if (membersAdded[cnt].id !== context.activity.recipient.id) {
                     await context.sendActivity('Hello and welcome!');
-                    await context.sendActivity('Enter your weight');
+                    
                 }
             }
             // By calling next() you ensure that the next BotHandler is run.
