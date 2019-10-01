@@ -31,6 +31,7 @@ class EchoBot extends ActivityHandler {
                 else if (unit== "foot"){
                     await context.sendActivity('Enter your height in foot');
                 }
+                step++;
 
             }
             else if(step==2){
