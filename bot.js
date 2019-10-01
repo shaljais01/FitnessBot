@@ -10,22 +10,16 @@ class EchoBot extends ActivityHandler {
         this.onMessage(async (context, next) => {
             const https = require('https');
 
-https.get('https://api.nasa.gov/planetary/apod?api_key=context', (resp) => {
-  let data = '';
+            const axios = require('axios');
 
-  // A chunk of data has been recieved.
-  resp.on('data', (chunk) => {
-    data += chunk;
-  });
-
-  // The whole response has been received. Print out the result.
-  resp.on('end', () => {
-    await context.sendActivity(JSON.parse(data).explanation);
-  });
-
-}).on("error", (err) => {
-    await context.sendActivity("Error: " + err.message);
-});
+            axios.get('https://api.nasa.gov/planetary/apod?api_key=context')
+              .then(response => {
+                await context.sendActivity(response.data.url);
+                await context.sendActivity(response.data.explanation);
+              })
+              .catch(error => {
+                await context.sendActivity(error);
+              });
 
             // By calling next() you ensure that the next BotHandler is run.
             await next();
