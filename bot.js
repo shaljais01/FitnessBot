@@ -108,12 +108,13 @@ class EchoBot extends ActivityHandler {
                 }
                  step++;
                  await context.sendActivity('Want to know about near by gym');
-                 await context.sendActivity('Enter yes or no');
+                 await context.sendActivity('Enter Yes or No');
             }
            else if(step==4){
             var ans= context.activity.text;
             if(ans=="Yes"){
-                await context.sendActivity('Enter your location with Pincode and locality');
+                await context.sendActivity('Enter your location ');
+                await context.sendActivity('Enter pincode ');
                 step++;
             }
               else{
@@ -123,8 +124,12 @@ class EchoBot extends ActivityHandler {
                 
             }
             else if(step==5){
-                var locality= context.activity.text;
-                if(locality=="Kashmere gate"){
+                await context.sendActivity('Enter locality ');
+                step++;
+            }
+            else if(step==6){
+                 locality= context.activity.text;
+                if(locality=="Kashmere Gate"){
                     await context.sendActivity('Xardum : A fitness Factory');
                     await context.sendActivity('Mercantile Building, 307, 2nd Floor,, Chandni Chowk Rd, Fatehpuri, Chandni ');
                     await context.sendActivity('Chowk, New Delhi, Delhi 110006');
