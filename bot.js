@@ -64,7 +64,7 @@ class EchoBot extends ActivityHandler {
             }
             else if(step==3){
                 var answer= context.activity.text;
-                if(answer=="Yes"){
+                if(answer=="Yes" || answer =="yes"){
 
                     if(bmi<18.5){
                         await context.sendActivity('Breakfast : 2 egg brown bread sandwich + green chutney + 1 cup milk + 3 cashews + 4 almonds + 2 walnuts');
@@ -112,7 +112,7 @@ class EchoBot extends ActivityHandler {
             }
            else if(step==4){
             var ans= context.activity.text;
-            if(ans=="Yes"){
+            if(ans=="Yes" || ans== "yes"){
                 await context.sendActivity('Enter your location ');
                 await context.sendActivity('Enter pincode ');
                 step++;
