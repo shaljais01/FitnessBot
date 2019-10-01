@@ -6,19 +6,40 @@ var height=0;
 var weight=0;
 var step=0;
 var bmi;
+var unit;
 class EchoBot extends ActivityHandler {
     constructor() {
         super();
         // See https://aka.ms/about-bot-activity-message to learn more about the message and other activity types.
         this.onMessage(async (context, next) => {
             if(step==0){
-             weight =parseInt(context.activity.text,10);
+             weight =parseFloat(context.activity.text,10);
              await context.sendActivity(' weight is '+ weight.toString());
              step++;
-             await context.sendActivity('Enter your height in m');
+             await context.sendActivity('Enter your height');
+             await context.sendActivity('Want to enter in meter , centimeter, foot');
             }
             else if(step==1){
-                height =parseInt(context.activity.text,10);
+                 unit = context.activity.text;
+                if(unit == "meter"){
+                    await context.sendActivity('Enter your height in m');
+                }
+                else if (unit == "centimeter"){
+                    await context.sendActivity('Enter your height in cm');
+                }
+                else if (unit== "foot"){
+                    await context.sendActivity('Enter your height in foot');
+                }
+
+            }
+            else if(step==2){
+                height =parseFloat(context.activity.text,10);
+                if(unit =="centimeter"){
+                    height=height/100;
+                }
+                else if(unit == "foot"){
+                    height=height*(0.305);
+                }
                 await context.sendActivity(' height is '+ height.toString());
                  bmi =weight/height;
                 await context.sendActivity('your bmi is');
@@ -39,9 +60,10 @@ class EchoBot extends ActivityHandler {
 
                 await context.sendActivity('Do you want to see diet plan\n Enter Yes or No');
             }
-            else if(step==2){
+            else if(step==3){
                 var answer= context.activity.text;
                 if(answer=="Yes"){
+
                     if(bmi<18.5){
                         await context.sendActivity('Breakfast : 2 egg brown bread sandwich + green chutney + 1 cup milk + 3 cashews + 4 almonds + 2 walnuts');
                         await context.sendActivity('Mid meal : 1 cup banana shake');
@@ -70,6 +92,9 @@ class EchoBot extends ActivityHandler {
                         await context.sendActivity('Evening : 1 cup strawberry smoothie + 1 cup vegetable poha');
                         await context.sendActivity('Dinner : 1.5 cup chicken curry + 3 chapatti + salad');
                     }
+                }
+                else{
+                    await context.sendActivity('Thank you');
                 }
 
             }
