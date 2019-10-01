@@ -7,7 +7,7 @@ var weight=0;
 var step=0;
 var bmi;
 var unit;
-
+var locality;
 class EchoBot extends ActivityHandler {
     constructor() {
         super();
@@ -76,27 +76,27 @@ class EchoBot extends ActivityHandler {
                     else if(bmi>=18.5 && bmi<=24.9){
                         await context.sendActivity('Breakfast : 2 egg brown bread sandwich + green chutney + 1 cup milk + 3 cashews + 4 almonds + 2 walnuts');
                         await context.sendActivity('Mid meal : 1 cup banana shake');
-                        await context.sendActivity('Lunch : 1 cup arhar dal + 1 cup potato curry + 3 chapatti + 1/2 cup rice + 1/2 cup low fat curd + salad');
+                        await context.sendActivity('Lunch :  1 cup potato curry + 3 chapatti + 1/2 cup rice + 1/2 cup low fat curd + salad');
                         await context.sendActivity('Evening : 1 cup strawberry smoothie + 1 cup vegetable poha');
                         await context.sendActivity('Dinner : 1.5 cup chicken curry + 3 chapatti + salad');
                     }
                     else if(bmi>25 && bmi <=29.9){
-                        await context.sendActivity('Breakfast : 2 egg brown bread sandwich + green chutney + 1 cup milk + 3 cashews + 4 almonds + 2 walnuts');
-                        await context.sendActivity('Mid meal : 1 cup banana shake');
-                        await context.sendActivity('Lunch : 1 cup arhar dal + 1 cup potato curry + 3 chapatti + 1/2 cup rice + 1/2 cup low fat curd + salad');
-                        await context.sendActivity('Evening : 1 cup strawberry smoothie + 1 cup vegetable poha');
-                        await context.sendActivity('Dinner : 1.5 cup chicken curry + 3 chapatti + salad');
+                        await context.sendActivity('Breakfast : Cornflakes + juice');
+                        await context.sendActivity('Mid meal : Green Tea');
+                        await context.sendActivity('Lunch : 1 cup potato curry + 2 chapatti ');
+                        await context.sendActivity('Evening : Green Tea');
+                        await context.sendActivity('Dinner : 1 cup curry  + 2 chapatti + salad');
                         await context.sendActivity('You can check out the following videos');
                         await context.sendActivity('https://www.youtube.com/watch?v=t7RhG0CEbVw&feature=youtu.be');
                         await context.sendActivity('https://www.youtube.com/watch?v=Gmh_xMMJ2Pw&feature=youtu.be');
                         await context.sendActivity('https://www.youtube.com/watch?v=fuEuNNdi55Q&feature=youtu.be');
                     }
                     else{
-                        await context.sendActivity('Breakfast : 2 egg brown bread sandwich + green chutney + 1 cup milk + 3 cashews + 4 almonds + 2 walnuts');
-                        await context.sendActivity('Mid meal : 1 cup banana shake');
-                        await context.sendActivity('Lunch : 1 cup arhar dal + 1 cup potato curry + 3 chapatti + 1/2 cup rice + 1/2 cup low fat curd + salad');
-                        await context.sendActivity('Evening : 1 cup strawberry smoothie + 1 cup vegetable poha');
-                        await context.sendActivity('Dinner : 1.5 cup chicken curry + 3 chapatti + salad');
+                        await context.sendActivity('Breakfast : Cornflakes + juice');
+                        await context.sendActivity('Mid meal : Green Tea');
+                        await context.sendActivity('Lunch : 1 cup potato curry + 2 chapatti ');
+                        await context.sendActivity('Evening : Green Tea');
+                        await context.sendActivity('Dinner : 1 cup curry  + 2 chapatti + salad');
                         await context.sendActivity('You can check out the following videos');
                         await context.sendActivity('https://www.youtube.com/watch?v=t7RhG0CEbVw&feature=youtu.be');
                         await context.sendActivity('https://www.youtube.com/watch?v=Gmh_xMMJ2Pw&feature=youtu.be');
@@ -111,30 +111,41 @@ class EchoBot extends ActivityHandler {
                  await context.sendActivity('Enter yes or no');
             }
            else if(step==4){
-
-                var ans= context.activity.text;
-                if(ans=="Yes"){
-                    https.get('https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyAPmDW6RHB_q1lx4neL_mHmhbEVZoNTRKw ', (resp) => {
-  let data = '';
-
-  // A chunk of data has been recieved.
-  resp.on('data', (chunk) => {
-    data += chunk;
-  });
-
-  // The whole response has been received. Print out the result.
-  resp.on('end', () => {
-    console.log(JSON.parse(data).explanation);
-  });
-
-}).on("error", (err) => {
-    await context.sendActivity('Error');
-});
-
+            var ans= context.activity.text;
+            if(ans=="Yes"){
+                await context.sendActivity('Enter your location with Pincode and locality');
+                step++;
+            }
+              else{
+                await context.sendActivity('Thank you');
+                step=0;
+              } 
+                
+            }
+            else if(step==5){
+                var locality= context.activity.text;
+                if(locality=="Kashmere gate"){
+                    await context.sendActivity('Xardum : A fitness Factory');
+                    await context.sendActivity('Mercantile Building, 307, 2nd Floor,, Chandni Chowk Rd, Fatehpuri, Chandni ');
+                    await context.sendActivity('Chowk, New Delhi, Delhi 110006');
+                    await context.sendActivity('https://maps.google.com/?cid=5834900321252194568');
+                    await context.sendActivity('Fun and fitness gym');
+                    await context.sendActivity('Gali Shyam Laal Jama Masjid, New Delhi, Delhi 110006');
+                    await context.sendActivity('099584 70422');
+                    await context.sendActivity('https://maps.app.goo.gl/z5BxTZAc6XcZzCeo7');
                 }
-                else if (ans =="No"){
-                    await context.sendActivity('Thank you');
-                    
+                else if(locality=="Rajiv Chowk"){
+                    await context.sendActivity('Anytime Fitness Cp');
+                    await context.sendActivity('B-37 & 38, 1st Floor, Connaught Place, New Delhi, Delhi 110001');
+                    await context.sendActivity('096411 11188');
+                    await context.sendActivity('https://g.co/kgs/JZ8sfu');
+                    await context.sendActivity('Advantage Healthcare');
+                    await context.sendActivity('Federation of Indian Chambers of Commerce and Industry,Federation House, Tansen, New Delhi, Delhi 110001');
+                    await context.sendActivity('011 2370 5468'); 
+                    await context.sendActivity('https://g.co/kgs/HxsGxH');
+                }
+                else{
+                    await context.sendActivity(' something went wrong');
                 }
                 step=0;
             }
