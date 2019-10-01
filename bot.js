@@ -105,9 +105,38 @@ class EchoBot extends ActivityHandler {
                 }
                 else{
                     await context.sendActivity('Thank you');
-                    step=0;
                 }
+                 step++;
+                 await context.sendActivity('Want to know about near by gym');
+                 await context.sendActivity('Enter yes or no');
+            }
+           else if(step==4){
 
+                var ans= context.activity.text;
+                if(ans=="Yes"){
+                    https.get('https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyAPmDW6RHB_q1lx4neL_mHmhbEVZoNTRKw ', (resp) => {
+  let data = '';
+
+  // A chunk of data has been recieved.
+  resp.on('data', (chunk) => {
+    data += chunk;
+  });
+
+  // The whole response has been received. Print out the result.
+  resp.on('end', () => {
+    console.log(JSON.parse(data).explanation);
+  });
+
+}).on("error", (err) => {
+    await context.sendActivity('Error');
+});
+
+                }
+                else if (ans =="No"){
+                    await context.sendActivity('Thank you');
+                    
+                }
+                step=0;
             }
             await next();
             //await context.sendActivity(`You said '${ context.activity.text }'`);
