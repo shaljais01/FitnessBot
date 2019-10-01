@@ -153,11 +153,11 @@ class EchoBot extends ActivityHandler {
                     await context.sendActivity(' something went wrong');
                 }
                 step=0;
-
-            }
-            await context.sendActivity('Thank you');
+                await context.sendActivity('Thank you');
     
-            await context.sendActivity('Enter your weight in kg');
+                await context.sendActivity('Enter your weight in kg');
+            }
+            
             await next();
             //await context.sendActivity(`You said '${ context.activity.text }'`);
 
