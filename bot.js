@@ -1,12 +1,13 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
-
+const https = require('https');
 const { ActivityHandler } = require('botbuilder');
 var height=0;
 var weight=0;
 var step=0;
 var bmi;
 var unit;
+
 class EchoBot extends ActivityHandler {
     constructor() {
         super();
@@ -84,6 +85,10 @@ class EchoBot extends ActivityHandler {
                         await context.sendActivity('Lunch : 1 cup arhar dal + 1 cup potato curry + 3 chapatti + 1/2 cup rice + 1/2 cup low fat curd + salad');
                         await context.sendActivity('Evening : 1 cup strawberry smoothie + 1 cup vegetable poha');
                         await context.sendActivity('Dinner : 1.5 cup chicken curry + 3 chapatti + salad');
+                        await context.sendActivity('You can check out the following videos');
+                        await context.sendActivity('https://www.youtube.com/watch?v=t7RhG0CEbVw&feature=youtu.be');
+                        await context.sendActivity('https://www.youtube.com/watch?v=Gmh_xMMJ2Pw&feature=youtu.be');
+                        await context.sendActivity('https://www.youtube.com/watch?v=fuEuNNdi55Q&feature=youtu.be');
                     }
                     else{
                         await context.sendActivity('Breakfast : 2 egg brown bread sandwich + green chutney + 1 cup milk + 3 cashews + 4 almonds + 2 walnuts');
@@ -91,10 +96,15 @@ class EchoBot extends ActivityHandler {
                         await context.sendActivity('Lunch : 1 cup arhar dal + 1 cup potato curry + 3 chapatti + 1/2 cup rice + 1/2 cup low fat curd + salad');
                         await context.sendActivity('Evening : 1 cup strawberry smoothie + 1 cup vegetable poha');
                         await context.sendActivity('Dinner : 1.5 cup chicken curry + 3 chapatti + salad');
+                        await context.sendActivity('You can check out the following videos');
+                        await context.sendActivity('https://www.youtube.com/watch?v=t7RhG0CEbVw&feature=youtu.be');
+                        await context.sendActivity('https://www.youtube.com/watch?v=Gmh_xMMJ2Pw&feature=youtu.be');
+                        await context.sendActivity('https://www.youtube.com/watch?v=fuEuNNdi55Q&feature=youtu.be');
                     }
                 }
                 else{
                     await context.sendActivity('Thank you');
+                    step=0;
                 }
 
             }
