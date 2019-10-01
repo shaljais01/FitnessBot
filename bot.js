@@ -119,6 +119,7 @@ class EchoBot extends ActivityHandler {
             }
               else{
                 await context.sendActivity('Thank you');
+                await context.sendActivity('Enter your weight in kg');
                 step=0;
               } 
                 
