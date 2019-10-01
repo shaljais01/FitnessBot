@@ -11,13 +11,16 @@ class EchoBot extends ActivityHandler {
             var weight =parseInt(context.activity.text,10);
             await context.sendActivity(weight.toString());
             await context.sendActivity('Enter your Height');
+            await next();
             var height =parseInt(context.activity.text,10);
             await context.sendActivity(height.toString());
-            
+            var bmi =height*weight;
+            await context.sendActivity('your bmi is');
+            await context.sendActivity(bmi.toString());
             //await context.sendActivity(`You said '${ context.activity.text }'`);
 
             // By calling next() you ensure that the next BotHandler is run.
-            await next();
+            
         });
 
         this.onMembersAdded(async (context, next) => {
